@@ -1,0 +1,16 @@
+---
+version: '3'
+services:
+
+  fusiondirectory:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      args:
+        - SLAPD_PASSWORD=passldap
+        - SLAPD_ORGANIZATION="Demo Fusion"
+        - SLAPD_DOMAIN=demo.fusion
+    network_mode: host
+
+networks:
+  default:
