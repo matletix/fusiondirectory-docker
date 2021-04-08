@@ -6,7 +6,7 @@ Based on the instructions given here : https://book.gallaksys.fr/books/fusiondir
 ## Installation
 
 ```
-git clone git@github.com:matletix/fusiondirectory-docker.git
+git clone https://github.com/matletix/fusiondirectory-docker.git
 cd fusiondirectory-docker/
 docker-compose up --build
 ```
