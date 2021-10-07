@@ -82,11 +82,6 @@ RUN bash -c "echo -e 'slapd slapd/no_configuration boolean false\n\
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-VOLUME /var/lib/ldap
-VOLUME /etc/ldap
-VOLUME /usr/local/share/fusiondirectory
-VOLUME /etc/fusiondirectory
-
 EXPOSE 80 389
 ENTRYPOINT /entrypoint.sh
 
