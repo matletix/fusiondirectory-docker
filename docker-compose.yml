@@ -11,6 +11,17 @@ services:
         - SLAPD_ORGANIZATION="Demo Fusion"
         - SLAPD_DOMAIN=demo.fusion
     network_mode: host
+    volumes:
+      - ldap-data-db:/var/lib/ldap
+      - ldap-data-etc:/etc/ldap
+      - fusion-data-share:/usr/local/share/fusiondirectory
+      - fusion-data-etc:/etc/fusiondirectory
+
+volumes:
+  ldap-data-db:
+  ldap-data-etc:
+  fusion-data-share:
+  fusion-data-etc:
 
 networks:
   default:
