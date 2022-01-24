@@ -15,9 +15,8 @@ RUN apt-get update && \
     php7.3-json php7.3-ldap php7.3-mbstring php7.3-opcache php7.3-readline php7.3-recode php7.3-xml smarty-gettext \
     smarty3 ssl-cert ttf-dejavu-core libjs-prototype libjs-scriptaculous libpath-class-perl libnet-ldap-perl \
     libcrypt-cbc-perl libarchive-extract-perl libfile-copy-recursive-perl libxml-twig-perl libterm-readkey-perl \
-    dirmngr gnupg apt-transport-https ca-certificates && \
+    dirmngr gnupg apt-transport-https ca-certificates libbytes-random-secure-perl && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install slapd ldap-utils && \
-    cpan Bytes::Random::Secure && \
     apt-get clean
 
 WORKDIR /usr/src
