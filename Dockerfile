@@ -1,4 +1,4 @@
-FROM debian:10
+FROM debian:11
 
 ARG SLAPD_PASSWORD
 ARG SLAPD_ORGANIZATION
@@ -9,13 +9,15 @@ RUN mkdir -p /etc/fusiondirectory /etc/ldap/schema/fusiondirectory /usr/local/sh
 
 # Install dependencies
 RUN apt-get update && \
-    apt-get install -y git rsync man-db build-essential locales unzip smarty3 \
-    apache2 libapache2-mod-php7.3 php php-cas php-common php-curl php-fpdf php-gd php-imagick php-imap php-ldap \
-    php-mbstring php-recode php-xml php7.3 php7.3-cli php7.3-common php7.3-curl php7.3-gd php7.3-imap \
-    php7.3-json php7.3-ldap php7.3-mbstring php7.3-opcache php7.3-readline php7.3-recode php7.3-xml smarty-gettext \
-    smarty3 ssl-cert ttf-dejavu-core libjs-prototype libjs-scriptaculous libpath-class-perl libnet-ldap-perl \
-    libcrypt-cbc-perl libarchive-extract-perl libfile-copy-recursive-perl libxml-twig-perl libterm-readkey-perl \
-    dirmngr gnupg apt-transport-https ca-certificates libbytes-random-secure-perl && \
+    apt-get install -y apache2 gettext javascript-common fonts-dejavu-core git \
+libapache2-mod-php7.4 libarchive-extract-perl libbytes-random-secure-perl \
+libcrypt-cbc-perl libdigest-sha-perl libfile-copy-recursive-perl \
+libjs-prototype libjs-scriptaculous libnet-ldap-perl libpath-class-perl \
+libterm-readkey-perl libxml-twig-perl locales openssl php php-cas php-cli php-common \
+php-curl php-fpdf php-gd php-imagick php-imap php-ldap php-mbstring php-xml \
+php7.4 php7.4-cli php7.4-common php7.4-curl php7.4-gd php7.4-imap php7.4-json \
+php7.4-ldap php7.4-mbstring php7.4-opcache php7.4-readline php7.4-xml \
+schema2ldif smarty-gettext smarty3 ssl-cert unzip && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install slapd ldap-utils && \
     apt-get clean
 
@@ -30,11 +32,6 @@ RUN GIT_SSL_NO_VERIFY=true git clone https://gitlab.fusiondirectory.org/fusiondi
 RUN cp ./fd/contrib/bin/* /usr/local/bin/ && \
     cp -r ./schema2ldif/bin/* /usr/local/bin/ && \
     chmod u+x /usr/local/bin/*
-
-# Install man pages of the binaries
-RUN mkdir -p /usr/local/man/man1 && \
-    rsync -v ./schema2ldif/man/*.1 /usr/local/man/man1 && \
-    mandb
 
 # Copy core LDAP schemas, smarty3 plugin, source files
 RUN cp ./fd/contrib/openldap/* /etc/ldap/schema/fusiondirectory/ && \
