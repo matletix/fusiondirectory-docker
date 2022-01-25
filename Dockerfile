@@ -59,7 +59,6 @@ RUN yes | /usr/local/bin/fusiondirectory-setup --set-fd_home=/usr/local/share/fu
 # Configure apache to serve fusiondirectory
 COPY fd.conf /etc/apache2/sites-available/fd.conf
 RUN a2dissite 000-default && a2ensite fd
-RUN cat /etc/apache2/apache2.conf
 
 # Configure OpenLDAP
 RUN bash -c "echo -e 'slapd slapd/no_configuration boolean false\n\
